@@ -1,0 +1,88 @@
+# ==============================================================================
+# ESP-IDF
+# ==============================================================================
+# Thư mục build chứa các file object, binaries, bootloader, partition table...
+build/
+
+# Các file do sdkconfig sinh ra
+sdkconfig.old
+# Cân nhắc: Commit sdkconfig.defaults và đưa 'sdkconfig' vào .gitignore 
+# nếu bạn làm việc trong team để tránh conflict, hoặc nếu sdkconfig chứa 
+# cấu hình wifi/password. Tuy nhiên, thông thường sdkconfig được commit 
+# trong các project cá nhân/mẫu.
+# sdkconfig 
+
+# dependencies folder sinh ra bởi ESP-IDF Component Manager
+managed_components/
+dependencies.lock
+
+# ==============================================================================
+# IDE và Tools
+# ==============================================================================
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/c_cpp_properties.json
+
+# Eclipse / Espressif IDE
+.cproject
+.project
+.settings/
+
+# Clion / CMake
+cmake-build-*/
+.idea/
+
+# ==============================================================================
+# OS Generated Files
+# ==============================================================================
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ==============================================================================
+# C/C++ General
+# ==============================================================================
+*.o
+*.obj
+*.so
+*.dll
+*.class
+*.exe
+*.out
+*.app
+*.bin
+*.elf
+*.map
+*.hex
+*.a
+*.lib
+
+# ==============================================================================
+# Secrets & Credentials (QUAN TRỌNG)
+# ==============================================================================
+# Bảo vệ các file chứa thông tin nhạy cảm: WiFi SSID/PASS, API Key, private keys, thư mục certs (nếu tự tạo local)
+*.pem
+*.key
+*.p12
+*.crt
+.env
+secret.h
+credentials.h
+
+# ==============================================================================
+# Skills & Subagent (Private)
+# ==============================================================================
+# Bỏ qua thư mục .skills ở thư mục gốc
+.skills/
+# Bỏ qua bất kỳ thư mục skill nào nằm bất cứ đâu trong dự án (như Day1_Blink_LED/skill)
+**/skill/
