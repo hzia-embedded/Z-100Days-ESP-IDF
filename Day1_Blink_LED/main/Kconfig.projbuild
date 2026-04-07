@@ -1,9 +1,35 @@
 menu "Example Configuration"
     config BLINK_GPIO
         int "Blink GPIO number"
+        range 0 21 if IDF_TARGET_ESP32C3
+        range 0 33 if IDF_TARGET_ESP32
+        range 0 46 if IDF_TARGET_ESP32S2
+        range 0 48 if IDF_TARGET_ESP32S3
         range 0 48
         default 4
         help
             GPIO number to blink on and off.
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to blink.
+
+            For ESP32:
+            - Input-only: GPIOs 34-39 cannot be used for output.
+            - Reserved: GPIOs 6-11 are for SPI Flash and MUST NOT be used.
+            - Strapping pins: GPIOs 0, 2, 5, 12, 15 can be used but be careful not to affect boot modes.
+
+    config BLINK_GPIO_WARNING_SPI_FLASH
+        bool "*** ERROR: GPIOs 6-11 are reserved for SPI Flash! ***"
+        depends on IDF_TARGET_ESP32 && (BLINK_GPIO = 6 || BLINK_GPIO = 7 || BLINK_GPIO = 8 || BLINK_GPIO = 9 || BLINK_GPIO = 10 || BLINK_GPIO = 11)
+        default y
+        help
+            You have selected a reserved pin for SPI Flash. 
+            Using this pin for LED will crash the system. Please change BLINK_GPIO.
+
+    config BLINK_GPIO_WARNING_STRAPPING
+        bool "*** WARNING: You have selected a Strapping Pin! ***"
+        depends on IDF_TARGET_ESP32 && (BLINK_GPIO = 0 || BLINK_GPIO = 2 || BLINK_GPIO = 5 || BLINK_GPIO = 12 || BLINK_GPIO = 15)
+        default y
+        help
+            You have selected a Strapping Pin (0, 2, 5, 12, or 15). 
+            Please ensure that your LED circuit does not pull this pin to an incorrect logic 
+            level during boot, otherwise the ESP32 may fail to boot up.
 endmenu
