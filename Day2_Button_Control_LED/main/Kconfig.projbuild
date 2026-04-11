@@ -1,0 +1,202 @@
+# LED Driver component configuration
+menu "LED Configuration"
+    choice LED_GPIO_SEL
+        prompt "LED GPIO number"
+        default LED_GPIO_4
+        help
+            Select the GPIO number to control the LED.
+            GPIOs 6-11 are RESERVED for SPI Flash and have been removed from this list 
+            to prevent system crashes.
+
+        config LED_GPIO_0
+            bool "GPIO 0 (Strapping pin)"
+        config LED_GPIO_1
+            bool "GPIO 1"
+        config LED_GPIO_2
+            bool "GPIO 2 (Strapping pin)"
+        config LED_GPIO_3
+            bool "GPIO 3"
+        config LED_GPIO_4
+            bool "GPIO 4"
+        config LED_GPIO_5
+            bool "GPIO 5 (Strapping pin)"
+        # 6-11 are skipped
+        config LED_GPIO_12
+            bool "GPIO 12 (Strapping pin)"
+        config LED_GPIO_13
+            bool "GPIO 13"
+        config LED_GPIO_14
+            bool "GPIO 14"
+        config LED_GPIO_15
+            bool "GPIO 15 (Strapping pin)"
+        config LED_GPIO_16
+            bool "GPIO 16"
+        config LED_GPIO_17
+            bool "GPIO 17"
+        config LED_GPIO_18
+            bool "GPIO 18"
+        config LED_GPIO_19
+            bool "GPIO 19"
+        config LED_GPIO_21
+            bool "GPIO 21"
+        config LED_GPIO_22
+            bool "GPIO 22"
+        config LED_GPIO_23
+            bool "GPIO 23"
+        config LED_GPIO_25
+            bool "GPIO 25"
+        config LED_GPIO_26
+            bool "GPIO 26"
+        config LED_GPIO_27
+            bool "GPIO 27"
+        config LED_GPIO_32
+            bool "GPIO 32"
+        config LED_GPIO_33
+            bool "GPIO 33"
+    endchoice
+
+    # Hidden mapping to provide the legacy CONFIG_LED_GPIO to the code
+    config LED_GPIO
+        int
+        default 0 if LED_GPIO_0
+        default 1 if LED_GPIO_1
+        default 2 if LED_GPIO_2
+        default 3 if LED_GPIO_3
+        default 4 if LED_GPIO_4
+        default 5 if LED_GPIO_5
+        default 12 if LED_GPIO_12
+        default 13 if LED_GPIO_13
+        default 14 if LED_GPIO_14
+        default 15 if LED_GPIO_15
+        default 16 if LED_GPIO_16
+        default 17 if LED_GPIO_17
+        default 18 if LED_GPIO_18
+        default 19 if LED_GPIO_19
+        default 21 if LED_GPIO_21
+        default 22 if LED_GPIO_22
+        default 23 if LED_GPIO_23
+        default 25 if LED_GPIO_25
+        default 26 if LED_GPIO_26
+        default 27 if LED_GPIO_27
+        default 32 if LED_GPIO_32
+        default 33 if LED_GPIO_33
+        default 40 if LED_GPIO_40
+        default 41 if LED_GPIO_41
+        default 42 if LED_GPIO_42
+        default 43 if LED_GPIO_43
+        default 44 if LED_GPIO_44
+        default 45 if LED_GPIO_45
+        default 46 if LED_GPIO_46
+        default 47 if LED_GPIO_47
+        default 48 if LED_GPIO_48
+        default 4
+
+    config LED_GPIO_WARNING_STRAPPING
+        bool "*** WARNING: You have selected a Strapping Pin! ***"
+        depends on LED_GPIO_0 || LED_GPIO_2 || LED_GPIO_5 || LED_GPIO_12 || LED_GPIO_15
+        default y
+        help
+            You have selected a Strapping Pin (0, 2, 5, 12, or 15). 
+            Please ensure that your LED circuit does not pull this pin to an incorrect logic 
+            level during boot, otherwise the ESP32 may fail to boot up.
+endmenu
+
+menu "Button Configuration"
+    choice BUTTON_GPIO_SEL
+        prompt "Button GPIO number"
+        default BUTTON_GPIO_0
+        help
+            Select the GPIO number for the Button.
+            GPIOs 6-11 are RESERVED for SPI Flash and have been removed from this list.
+            GPIOs 34-39 are input-only pins, which are suitable for buttons.
+
+        config BUTTON_GPIO_0
+            bool "GPIO 0 (BOOT button/Strapping pin)"
+        config BUTTON_GPIO_2
+            bool "GPIO 2 (Strapping pin)"
+        config BUTTON_GPIO_4
+            bool "GPIO 4"
+        config BUTTON_GPIO_5
+            bool "GPIO 5 (Strapping pin)"
+        # 6-11 are skipped
+        config BUTTON_GPIO_12
+            bool "GPIO 12 (Strapping pin)"
+        config BUTTON_GPIO_13
+            bool "GPIO 13"
+        config BUTTON_GPIO_14
+            bool "GPIO 14"
+        config BUTTON_GPIO_15
+            bool "GPIO 15 (Strapping pin)"
+        config BUTTON_GPIO_16
+            bool "GPIO 16"
+        config BUTTON_GPIO_17
+            bool "GPIO 17"
+        config BUTTON_GPIO_18
+            bool "GPIO 18"
+        config BUTTON_GPIO_19
+            bool "GPIO 19"
+        config BUTTON_GPIO_21
+            bool "GPIO 21"
+        config BUTTON_GPIO_22
+            bool "GPIO 22"
+        config BUTTON_GPIO_23
+            bool "GPIO 23"
+        config BUTTON_GPIO_25
+            bool "GPIO 25"
+        config BUTTON_GPIO_26
+            bool "GPIO 26"
+        config BUTTON_GPIO_27
+            bool "GPIO 27"
+        config BUTTON_GPIO_32
+            bool "GPIO 32"
+        config BUTTON_GPIO_33
+            bool "GPIO 33"
+        config BUTTON_GPIO_34
+            bool "GPIO 34 (Input only)"
+        config BUTTON_GPIO_35
+            bool "GPIO 35 (Input only)"
+        config BUTTON_GPIO_36
+            bool "GPIO 36 (Input only)"
+        config BUTTON_GPIO_39
+            bool "GPIO 39 (Input only)"
+    endchoice
+
+    config BUTTON_GPIO
+        int
+        default 0 if BUTTON_GPIO_0
+        default 2 if BUTTON_GPIO_2
+        default 4 if BUTTON_GPIO_4
+        default 5 if BUTTON_GPIO_5
+        default 12 if BUTTON_GPIO_12
+        default 13 if BUTTON_GPIO_13
+        default 14 if BUTTON_GPIO_14
+        default 15 if BUTTON_GPIO_15
+        default 16 if BUTTON_GPIO_16
+        default 17 if BUTTON_GPIO_17
+        default 18 if BUTTON_GPIO_18
+        default 19 if BUTTON_GPIO_19
+        default 21 if BUTTON_GPIO_21
+        default 22 if BUTTON_GPIO_22
+        default 23 if BUTTON_GPIO_23
+        default 25 if BUTTON_GPIO_25
+        default 26 if BUTTON_GPIO_26
+        default 27 if BUTTON_GPIO_27
+        default 32 if BUTTON_GPIO_32
+        default 33 if BUTTON_GPIO_33
+        default 34 if BUTTON_GPIO_34
+        default 35 if BUTTON_GPIO_35
+        default 36 if BUTTON_GPIO_36
+        default 39 if BUTTON_GPIO_39
+        default 0
+
+    config BUTTON_GPIO_WARNING_STRAPPING
+        bool "*** WARNING: You have selected a Strapping Pin for the Button! ***"
+        depends on BUTTON_GPIO_0 || BUTTON_GPIO_2 || BUTTON_GPIO_5 || BUTTON_GPIO_12 || BUTTON_GPIO_15
+        default y
+        help
+            You have selected a Strapping Pin (0, 2, 5, 12, or 15). 
+            If the button is pressed during boot, it might change the boot mode 
+            or cause the ESP32 to fail to start correctly.
+endmenu
+
+

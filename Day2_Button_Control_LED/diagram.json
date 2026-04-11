@@ -15,21 +15,31 @@
     {
       "type": "wokwi-led",
       "id": "led1",
-      "top": 34.8,
-      "left": 147.8,
+      "top": -22.8,
+      "left": 157.4,
       "attrs": {
-        "color": "red",
-        "flip": "1"
+        "color": "red"
       }
     },
     {
       "type": "wokwi-resistor",
       "id": "r1",
-      "top": 158.4,
-      "left": 143.45,
+      "top": 100.8,
+      "left": 153.05,
       "rotate": 90,
       "attrs": {
         "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "btn1",
+      "top": 54,
+      "left": 125.6,
+      "rotate": 180,
+      "attrs": {
+        "color": "green",
+        "xray": "1"
       }
     }
   ],
@@ -47,29 +57,44 @@
       []
     ],
     [
-      "r1:2",
-      "esp:GND.1",
-      "black",
+      "led1:A",
+      "r1:1",
+      "red",
       [
-        "v37.2",
-        "h-192",
-        "v-76.8"
+        "v0"
+      ]
+    ],
+    [
+      "esp:4",
+      "r1:2",
+      "red",
+      [
+        "h0"
       ]
     ],
     [
       "led1:C",
-      "r1:1",
+      "esp:GND.2",
+      "white",
+      [
+        "v0"
+      ]
+    ],
+    [
+      "btn1:1.r",
+      "esp:18",
       "green",
       [
         "v0"
       ]
     ],
     [
-      "led1:A",
-      "esp:4",
-      "green",
+      "btn1:2.r",
+      "esp:GND.2",
+      "white",
       [
-        "v0"
+        "h-0.8",
+        "v-29.2"
       ]
     ]
   ],
